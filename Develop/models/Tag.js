@@ -6,16 +6,14 @@ class Tag extends Model {}
 
 Tag.init(
   {
-    tag_name: {
+    id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       primaryKey: true,
+      autoIncrement: true
     },
-    tag_id: {
-      type: DataTypes.ITEGER,
-      references: {
-        model: 'ProductTag',
-        key: 'id',
-      }
+    tag_name: {
+      type: DataTypes.STRING,
     }
   },
   {

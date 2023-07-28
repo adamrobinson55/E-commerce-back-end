@@ -105,23 +105,23 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
 
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
-
   try {
-    const productData = await Product.destroy(req.body, {
+    const deletedCount = await Product.destroy({
       where: {
         id: req.params.id
       },
     })
-    if (!productData[0]) {
+    if (deletedCount === 0) {
       res.status(404).json({ message: 'No product with that id!'})
     }
+    return res.status(200).json({ message: 'Product deleted successfully!' })
   } catch(err) {
     res.status(500).json(err)
   }
